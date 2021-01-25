@@ -7,11 +7,22 @@ DELETE /delete
 PUT /update
 
 DB:
-Users
+User
   email: String required
   username: String
   password: String required
   songs: Array of Songs default []
-  authorization: Stringm, enum [user, admin], default user
+  role: Stringm, enum [user, admin], default user
 
-Songs
+Song
+  title: String
+  buttonsPressed: Object
+  bpm: Number
+  volume: Number
+  numberOfBeats: Number
+  chordProgression: Array
+
+
+
+Resource: 
+https://www.youtube.com/watch?v=scYojqjnHzI&t=145s
