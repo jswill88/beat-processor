@@ -4,7 +4,8 @@ POST /signin
 GET /open  
 POST /save  
 DELETE /delete  
-PUT /update  
+PUT /update
+GET /examples  
 
 DB:  
 User  
@@ -12,7 +13,7 @@ User
   username: String  
   password: String required  
   songs: Array of Songs default []  
-  role: Stringm, enum [user, admin], default user  
+  role: String, enum [user, admin], default user  
 
 Song  
   title: String  
