@@ -6,33 +6,27 @@ router.post('/testsignup', async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    if (!(email && password)) {
-      return next({
-        status: 400,
-        message: 'Must provide email and password to signup',
-      });
+    const newUser = new TestUser({email, password});
+    let error = newUser.validateSync();
+
+    if(error) {
+
+      let messageArray = [];
+      for (let type in error.errors){
+        messageArray.push(error.errors[type].message);
+      }
+      const message = messageArray.join(', ');
+      return next({status: 400, message});
+
+    } else {
+
+      await newUser.save();
+
     }
 
-    if (
-      password.length < 6
-      || password.length > 32
-      || !password.match(/[0-9]/)
-      || !password.match(/[a-z]/)
-      || !password.match(/[A-Z]/)
-    ) {
-      return next({
-        status: 400,
-        message: 'Password must be between 6 and 32 characters and include an uppercase letter, a lowercase letter, and a number',
-      });
-    }
-    
-    const newUser = await TestUser.create({ email, password });
-    console.log(newUser);
     res.status(201).json(`email: ${email} password: ${password}`);
 
   } catch (e) {
-
-    console.error(e.message);
 
     if (e.code && e.code === 11000) {
       next({ message: 'Account with that email already exists' });
