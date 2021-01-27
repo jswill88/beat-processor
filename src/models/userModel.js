@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const songSchema = require('./songModel');
 
-const testUserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, 'Email required'],
@@ -21,12 +22,26 @@ const testUserSchema = new mongoose.Schema({
       message: 'Password must include an uppercase letter, a lowercase letter, and a number',
     },
   },
+  username: {
+    type: String,
+    required: true,
+  },
+  songs: {
+    type: [songSchema],
+    required: true,
+  },
+  role: {
+    type: String,
+    enum: ['user','admin'],
+    default: 'user',
+    required: true, 
+  },
 });
 
-testUserSchema.pre('save', async function () {
+userSchema.pre('save', async function () {
   if (this.isModified('password')) {
     this.password = await bcrypt.hash(this.password, 10);
   }
 });
 
-module.exports = mongoose.model('testUser', testUserSchema);
+module.exports = mongoose.model('User', userSchema);
