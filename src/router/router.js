@@ -1,38 +1,56 @@
 const express = require('express');
 const router = express.Router();
-const TestUser = require('../models/userModel');
+const User = require('../models/userModel');
+const jwt = require('jsonwebtoken');
 
-router.post('/testsignup', async (req, res, next) => {
+router.post('/signup', async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    let {
+      email,
+      password,
+      passwordVerify,
+      username,
+    } = req.body;
 
-    if (!(email && password)) {
-      return next({
-        status: 400,
-        message: 'Must provide email and password to signup',
-      });
+    if (password !== passwordVerify) {
+      return next({ status: 400, message: 'Passwords do not match' });
     }
 
-    if (
-      password.length < 6
-      || password.length > 32
-      || !password.match(/[0-9]/)
-      || !password.match(/[a-z]/)
-      || !password.match(/[A-Z]/)
-    ) {
-      return next({
-        status: 400,
-        message: 'Password must be between 6 and 32 characters and include an uppercase letter, a lowercase letter, and a number',
-      });
+    if (!username) {
+      username = email;
     }
-    
-    const newUser = await TestUser.create({ email, password });
-    console.log(newUser);
-    res.status(201).json(`email: ${email} password: ${password}`);
+
+    const newUser = new User({ email, password, username });
+    let error = newUser.validateSync();
+
+    if (error) {
+
+      let messageArray = [];
+      for (let type in error.errors) {
+        messageArray.push(error.errors[type].message);
+      }
+      const message = messageArray.join(', ');
+      return next({ status: 400, message });
+
+    } else {
+
+      const savedUser = await newUser.save();
+
+      const token = jwt.sign({
+        userId: savedUser._id,
+      }, process.env.JWT_SECRET);
+
+      console.log(token);
+
+      res
+        .status(201)
+        .cookie('token', token, {
+          httpOnly: true,
+        })
+        .send('User successfully added');
+    }
 
   } catch (e) {
-
-    console.error(e.message);
 
     if (e.code && e.code === 11000) {
       next({ message: 'Account with that email already exists' });
