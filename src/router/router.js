@@ -1,6 +1,7 @@
+const base64 = require('base-64');
 const express = require('express');
 const router = express.Router();
-const User = require('../models/userModel');
+const { User } = require('../models/userModel');
 
 router.post('/signup', async (req, res, next) => {
   try {
@@ -113,13 +114,27 @@ router.get('/logout', (_req, res, next) => {
   }
 });
 
-router.post('/save', (req, res, next) => {
+router.get('/test', (req, res, next) => {
+  console.log(req.cookies);
+  res.send();
+});
+
+router.post('/save', async (req, res, next) => {
   try {
-    // const { token, song } = req.body;
+    const song = req.body;
+    const token = req.cookies.token;
+
+    const encryptedId = token.split('.')[1];
+    const id = JSON.parse(base64.decode(encryptedId)).id;
+    console.log(id);
+    const user = await User.findById(id);
+    const currentSongs = user.songs;
+    currentSongs.push(song);
+    
     // get id from token
     // see if a song already exists of that name
     // add new song to array in songs for user
-
+    res.status(201).send('Song saved');
   } catch (e) {
     next({ message: e.message });
   }

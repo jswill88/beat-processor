@@ -8,5 +8,8 @@ const songSchema = new mongoose.Schema({
   chordProgression: { type: Array, required: true }, 
 });
 
-module.exports = songSchema;
+module.exports = {
+  songSchema,
+  Song: mongoose.model('Song', songSchema),
+};
 

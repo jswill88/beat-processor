@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const songSchema = require('./songModel');
+const { songSchema } = require('./songModel');
 const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
@@ -56,4 +56,4 @@ userSchema.methods.generateToken = function () {
   return token;
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports.User = mongoose.model('User', userSchema);
