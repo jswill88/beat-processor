@@ -1,8 +1,9 @@
 Routes:  
-POST /signup  
-POST /signin  
-GET /open  
+xPOST /signup  
+xPOST /signin  
+xGET /logout
 POST /save  
+GET /open  
 DELETE /delete  
 PUT /update
 GET /examples  

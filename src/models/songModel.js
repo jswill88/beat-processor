@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
 
 const songSchema = new mongoose.Schema({
-  title: { type: String }, 
-  buttonsPressed: { type: Object },
-  bpm: { type: Number },
-  volume: { type: Number }, 
-  numberOfBeats: { type: Number }, 
-  chordProgression: { type: Array }, 
+  title: { type: String, required: true }, 
+  buttonsPressed: { type: Object, required: true },
+  bpm: { type: Number, required: true },
+  numberOfBeats: { type: Number, required: true }, 
+  chordProgression: { type: Array, required: true }, 
 });
 
-module.exports = songSchema;
+module.exports = {
+  songSchema,
+  Song: mongoose.model('Song', songSchema),
+};
 

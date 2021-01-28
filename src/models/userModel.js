@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const songSchema = require('./songModel');
+const { songSchema } = require('./songModel');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -44,4 +45,15 @@ userSchema.pre('save', async function () {
   }
 });
 
-module.exports = mongoose.model('User', userSchema);
+userSchema.methods.comparePasswords = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
+userSchema.methods.generateToken = function () {
+  const token = jwt.sign({
+    id: this._id,
+  }, process.env.JWT_SECRET);
+  return token;
+};
+
+module.exports.User = mongoose.model('User', userSchema);
