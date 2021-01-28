@@ -1,6 +1,7 @@
 Routes:  
 xPOST /signup  
 xPOST /signin  
+GET /logout
 GET /open  
 POST /save  
 DELETE /delete  

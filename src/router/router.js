@@ -61,10 +61,17 @@ router.post('/signin', async (req, res, next) => {
 
     const { email, password } = req.body;
 
+    if (!email || !password) {
+      return next({
+        status: 400,
+        message: 'Missing email or password',
+      });
+    }
+
     const user = await User.findOne({ email });
     if (!user) {
       return next({
-        status: 400,
+        status: 401,
         message: 'No user found with that email',
       });
     }
@@ -72,7 +79,7 @@ router.post('/signin', async (req, res, next) => {
     const match = await user.comparePasswords(password);
     if (!match) {
       return next({
-        status: 400,
+        status: 401,
         message: 'Wrong password',
       });
     }
@@ -92,15 +99,29 @@ router.post('/signin', async (req, res, next) => {
 
 });
 
+router.get('/logout', (_req, res, next) => {
+  try {
+    res
+      .status(200)
+      .cookie('token', '', {
+        httpOnly: true,
+        expires: new Date(0),
+      })
+      .send();
+  } catch (e) {
+    next({ message: e.message });
+  }
+});
+
 router.post('/save', (req, res, next) => {
   try {
-    const { token, song } = req.body;
+    // const { token, song } = req.body;
     // get id from token
     // see if a song already exists of that name
     // add new song to array in songs for user
 
   } catch (e) {
-    next({ message: e.message});
+    next({ message: e.message });
   }
 });
 
