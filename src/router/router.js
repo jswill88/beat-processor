@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/userModel');
-const jwt = require('jsonwebtoken');
 
 router.post('/signup', async (req, res, next) => {
   try {
@@ -91,6 +90,18 @@ router.post('/signin', async (req, res, next) => {
     next({ message: e.message });
   }
 
+});
+
+router.post('/save', (req, res, next) => {
+  try {
+    const { token, song } = req.body;
+    // get id from token
+    // see if a song already exists of that name
+    // add new song to array in songs for user
+
+  } catch (e) {
+    next({ message: e.message});
+  }
 });
 
 module.exports = router;
