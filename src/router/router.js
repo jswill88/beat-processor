@@ -36,18 +36,14 @@ router.post('/signup', async (req, res, next) => {
 
       const savedUser = await newUser.save();
 
-      const token = jwt.sign({
-        userId: savedUser._id,
-      }, process.env.JWT_SECRET);
-
-      console.log(token);
+      const token = savedUser.generateToken();
 
       res
         .status(201)
         .cookie('token', token, {
           httpOnly: true,
         })
-        .send('User successfully added');
+        .json('User successfully added');
     }
 
   } catch (e) {
@@ -57,6 +53,42 @@ router.post('/signup', async (req, res, next) => {
     } else {
       next({ message: e.message });
     }
+  }
+
+});
+
+router.post('/signin', async (req, res, next) => {
+  try {
+
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return next({
+        status: 400,
+        message: 'No user found with that email',
+      });
+    }
+
+    const match = await user.comparePasswords(password);
+    if (!match) {
+      return next({
+        status: 400,
+        message: 'Wrong password',
+      });
+    }
+
+    const token = user.generateToken();
+
+    res
+      .status(200)
+      .cookie('token', token, {
+        httpOnly: true,
+      })
+      .json('User successfully signed in');
+
+  } catch (e) {
+    next({ message: e.message });
   }
 
 });
