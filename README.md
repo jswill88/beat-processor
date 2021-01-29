@@ -1,14 +1,14 @@
 Routes:  
 xPOST /signup  
 xPOST /signin  
-xGET /logout
-xPOST /save - behaves like save as
+xGET /logout  
+xPOST /save - behaves like save as  
 GET /open  
-DELETE /delete - delete a song
-PUT /update - update song already saved without renaming
-PUT /rename
-GET /example songs
-POST /examples
+DELETE /delete - delete a song  
+PUT /update - update song already saved without renaming  
+PUT /rename  
+GET /example songs  
+POST /examples  
 
 DB:  
 User  
