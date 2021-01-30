@@ -19,7 +19,11 @@ const base64 = require('base-64');
 const User = require('../models/userModel');
 
 // try moving the active song out of the token, and back into 
-// it's own songId or something
+// it's own songId or something. Just clear taht cookie if you 
+// deleting the active song
+
+// maybe consider moving some of the logic outside of the
+// callback function
 router.delete('/deletesong', async (req, res, next) => {
   try {
     const { songIdToDelete } = req.body;
