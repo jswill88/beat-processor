@@ -12,8 +12,8 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Password required'],
-    minlength: [6, 'Password must be at least 6 characters'],
-    maxlength: [32, 'Password must be less than 32 characters'],
+    // minlength: [6, 'Password must be at least 6 characters'],
+    // maxlength: [32, 'Password must be less than 32 characters'],
     validate: {
       validator: input => (
         input.match(/[0-9]/)
@@ -49,9 +49,10 @@ userSchema.methods.comparePasswords = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.generateToken = function () {
+userSchema.methods.generateToken = function (songId) {
   const token = jwt.sign({
     id: this._id,
+    songId,
   }, process.env.JWT_SECRET);
   return token;
 };
