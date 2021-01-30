@@ -10,6 +10,8 @@ PUT /rename
 GET /example songs  
 POST /examples  
 
+if there is an active project - save that one, else save a new one
+
 DB:  
 User  
   email: String required  
@@ -25,6 +27,7 @@ Song
   volume: Number  
   numberOfBeats: Number  
   chordProgression: Array  
+
 
 
 

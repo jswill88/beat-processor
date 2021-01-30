@@ -12,6 +12,13 @@ module.exports = async (req, res, next) => {
     if (password !== passwordVerify) {
       return next({ status: 400, message: 'Passwords do not match' });
     }
+    const { length } = password;
+    if(length < 6 || length > 32) {
+      return next({
+        status: 400,
+        message: 'Password must be from 6-32 characters',
+      });
+    }
 
     if (!username) {
       username = email;
