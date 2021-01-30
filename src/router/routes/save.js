@@ -15,7 +15,10 @@ module.exports = async (req, res, next) => {
     const songToSave = req.body;
     const { token } = req.cookies;
 
-    if (!token) {
+    console.log(token);
+
+    if (!token || token === 'undefined') {
+      console.log('in if');
       return next({
         status: 400,
         message: 'Must be signed in to save song',
@@ -32,6 +35,7 @@ module.exports = async (req, res, next) => {
     }
 
     const encryptedId = token.split('.')[1];
+
     const { id } = JSON.parse(base64.decode(encryptedId));
 
     const user = await User.findById(id);
@@ -64,6 +68,6 @@ module.exports = async (req, res, next) => {
       })
       .json(`Song '${songToSave.title}' saved`);
   } catch (e) {
-    next({ message: e.message });
+    next({ message: e.message, status: e.status || 500 });
   }
 };
