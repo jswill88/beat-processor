@@ -49,10 +49,9 @@ userSchema.methods.comparePasswords = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.generateToken = function (songId) {
+userSchema.methods.generateToken = function () {
   const token = jwt.sign({
     id: this._id,
-    songId,
   }, process.env.JWT_SECRET);
   return token;
 };

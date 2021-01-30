@@ -59,11 +59,9 @@ module.exports = async (req, res, next) => {
     const { songs } = await User.findById(id);
     const newSongId = songs.pop()._id;
 
-    const newToken = user.generateToken(newSongId);
-
     res
       .status(201)
-      .cookie('token', newToken, {
+      .cookie('songId', newSongId, {
         httpOnly: true,
       })
       .json(`Song '${songToSave.title}' saved`);

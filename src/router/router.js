@@ -27,8 +27,10 @@ const User = require('../models/userModel');
 router.delete('/deletesong', async (req, res, next) => {
   try {
     const { songIdToDelete } = req.body;
-    const { token } = req.cookies;
+    const { token, songId } = req.cookies;
     let songTitle;
+
+    console.log(songIdToDelete, songId);
 
     if (!token || token === 'undefined') {
       return next({
@@ -42,17 +44,17 @@ router.delete('/deletesong', async (req, res, next) => {
         message: 'Must select song to delete',
       });
     }
+
     const encryptedId = token.split('.')[1];
+    const { id } = JSON.parse(base64.decode(encryptedId));
 
-    const { id, songId } = JSON.parse(base64.decode(encryptedId));
-
-    let updatedToken;
     let songExists = true;
 
     await User.findByIdAndUpdate(id, {}, async (err, user) => {
 
       if (err) return next({ message: 'Error finding user' });
       console.log(user.songs);
+
       const songToDelete = await user.songs.id(songIdToDelete);
       console.log('song to delete', songToDelete);
       if (!songToDelete) {
@@ -66,10 +68,6 @@ router.delete('/deletesong', async (req, res, next) => {
       await user.songs.pull(songIdToDelete);
       user.save();
 
-      updatedToken = String(songId) === String(songIdToDelete) ?
-        await user.generateToken() : token;
-
-      console.log('updated Token', JSON.parse(base64.decode(updatedToken.split('.')[1])));
       return;
     });
 
@@ -80,14 +78,16 @@ router.delete('/deletesong', async (req, res, next) => {
 
     else {
       console.log('after next', songExists);
+      if (songId === songIdToDelete) {
+        res.clearCookie('songId');
+      }
       res
         .status(200)
-        .cookie('token', updatedToken, {
-          httpOnly: true,
-        }).json(`Successfully deleted ${songTitle}`);
+        .json(`Successfully deleted ${songTitle}`);
     }
-
+    console.log('somehow in neither');
   } catch (e) {
+
     next({ message: e.message });
   }
 });
