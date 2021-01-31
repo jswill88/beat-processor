@@ -2,12 +2,12 @@ Routes:
 xPOST /signup  
 xPOST /signin  
 xGET /logout  
-xPOST /save - behaves like save as
+xPOST /save - behaves like save as  
 xGET /songlist - sends back song titles and ids for signed in user  
 xGET /open  
 xDELETE /deletesong - delete a song  
 xPUT /update - update song already saved without renaming  
-PATCH /rename  
+xPATCH /rename  
 GET /examplesongs  
 POST /examples  
 
