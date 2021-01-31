@@ -3,11 +3,11 @@ xPOST /signup
 xPOST /signin  
 xGET /logout  
 xPOST /save - behaves like save as
-GET /songlist - sends back song titles and ids for signed in user  
+xGET /songlist - sends back song titles and ids for signed in user  
 GET /open  
 xDELETE /deletesong - delete a song  
 PUT /update - update song already saved without renaming  
-PUT /rename  
+PATCH /rename  
 GET /example songs  
 POST /examples  
 
