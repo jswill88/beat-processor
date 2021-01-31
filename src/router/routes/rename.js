@@ -19,6 +19,12 @@ module.exports = async (req, res, next) => {
     }
 
     const user = await User.getUserFromToken(token);
+    if (!user) {
+      return next({
+        status: 401,
+        message: 'Error finding user',
+      });
+    }
 
     const otherSongTitles = user.songs
       .filter(({ _id }) => String(_id) !== String(songId))
