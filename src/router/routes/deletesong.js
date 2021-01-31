@@ -1,4 +1,3 @@
-const base64 = require('base-64');
 const User = require('../../models/userModel');
 /**
  * @name deleteSong Takes in songIdToDelete from the request body
@@ -27,13 +26,7 @@ module.exports = async (req, res, next) => {
       });
     }
 
-    const encryptedId = token.split('.')[1];
-    const { id } = JSON.parse(base64.decode(encryptedId));
-
-    const user = await User.findById(id);
-    if (!user) {
-      return next({ message: 'Error finding user' });
-    }
+    const user = await User.getUserFromToken(token);
     // console.log(user.songs);
     const songToDelete = user.songs.id(songIdToDelete);
     if (!songToDelete) {

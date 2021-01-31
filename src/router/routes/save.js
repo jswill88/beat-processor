@@ -1,4 +1,3 @@
-const base64 = require('base-64');
 const User = require('../../models/userModel');
 /**
  * @name save Saves a new song. Adds a number to the title if 
@@ -15,10 +14,7 @@ module.exports = async (req, res, next) => {
     const songToSave = req.body;
     const { token } = req.cookies;
 
-    console.log(token);
-
     if (!token || token === 'undefined') {
-      console.log('in if');
       return next({
         status: 400,
         message: 'Must be signed in to save song',
@@ -34,11 +30,8 @@ module.exports = async (req, res, next) => {
       songToSave.title = 'Untitled';
     }
 
-    const encryptedId = token.split('.')[1];
-
-    const { id } = JSON.parse(base64.decode(encryptedId));
-
-    const user = await User.findById(id);
+    const user = await User.getUserFromToken(token);
+    const { id } = user;
 
     const currentSongs = user.songs;
 

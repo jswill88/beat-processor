@@ -4,7 +4,7 @@ module.exports = (_req, res, next) => {
       .status(200)
       .clearCookie('songId')
       .clearCookie('token')
-      .send();
+      .json('Logged out successfully');
   } catch (e) {
     next({ message: e.message });
   }

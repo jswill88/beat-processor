@@ -4,7 +4,7 @@ xPOST /signin
 xGET /logout  
 xPOST /save - behaves like save as
 xGET /songlist - sends back song titles and ids for signed in user  
-GET /open  
+xGET /open  
 xDELETE /deletesong - delete a song  
 PUT /update - update song already saved without renaming  
 PATCH /rename  

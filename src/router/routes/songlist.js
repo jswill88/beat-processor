@@ -1,4 +1,4 @@
-const base64 = require('base-64');
+// const base64 = require('base-64');
 const User = require('../../models/userModel');
 
 module.exports = async (req, res, next) => {
@@ -11,10 +11,11 @@ module.exports = async (req, res, next) => {
     });
   }
 
-  const encryptedId = token.split('.')[1];
-  const { id } = JSON.parse(base64.decode(encryptedId));
+  // const encryptedId = token.split('.')[1];
+  // const { id } = JSON.parse(base64.decode(encryptedId));
 
-  const user = await User.findById(id);
+  // const user = await User.findById(id);
+  const user = await User.getUserFromToken(token);
   if (!user) {
     return next({ message: 'Error finding user' });
   }
