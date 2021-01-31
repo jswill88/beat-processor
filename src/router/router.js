@@ -7,12 +7,16 @@ const logout = require('./routes/logout');
 const save = require('./routes/save');
 const test = require('./routes/test');
 const deleteSong = require('./routes/deletesong');
+const songList = require('./routes/songlist');
 
 router.post('/signup', signUp);
 router.post('/signin', signIn);
 router.post('/save', save);
+
 router.get('/logout', logout);
+router.get('/songlist', songList);
 router.get('/test', test);
+
 router.delete('/deletesong', deleteSong);
 
 module.exports = router;
