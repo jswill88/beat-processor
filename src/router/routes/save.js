@@ -37,8 +37,8 @@ module.exports = async (req, res, next) => {
 
     const titles = currentSongs.map(({ title }) => title);
 
-    let i = 1;
     if (titles.includes(songToSave.title)) {
+      let i = 1;
       while (titles.includes(songToSave.title + `-${i}`)) {
         i++;
       }
