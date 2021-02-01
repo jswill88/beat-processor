@@ -9,6 +9,8 @@ const test = require('./routes/test');
 const deleteSong = require('./routes/deletesong');
 const songList = require('./routes/songlist');
 const open = require('./routes/open');
+const update = require('./routes/update');
+const rename = require('./routes/rename');
 
 router.post('/signup', signUp);
 router.post('/signin', signIn);
@@ -20,5 +22,8 @@ router.get('/test', test);
 router.get('/open', open);
 
 router.delete('/deletesong', deleteSong);
+
+router.put('/update', update);
+router.patch('/rename', rename);
 
 module.exports = router;

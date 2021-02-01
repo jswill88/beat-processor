@@ -27,8 +27,9 @@ module.exports = async (req, res, next) => {
     }
 
     const user = await User.getUserFromToken(token);
-    // console.log(user.songs);
+
     const songToDelete = user.songs.id(songIdToDelete);
+    
     if (!songToDelete) {
       return next({ message: 'Error finding song' });
     }
