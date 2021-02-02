@@ -5,7 +5,7 @@
 module.exports = (req, res, next) => {
   // const { token } = req.cookies;
   // console.log(songId);
-  console.log('hello');
+  console.log(req.body);
 
   res.json('test workds');
 };
