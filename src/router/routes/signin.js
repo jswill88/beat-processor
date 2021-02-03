@@ -29,13 +29,15 @@ module.exports = async (req, res, next) => {
     }
 
     const token = user.generateToken();
+    const { username } = user;
+    const songs = user.songs.map(({title, _id}) => ({title, id: _id}));
 
     res
       .status(200)
       .cookie('token', token, {
         httpOnly: true,
       })
-      .json('User successfully signed in');
+      .json({ username, songs });
 
   } catch (e) {
     next({ message: e.message });

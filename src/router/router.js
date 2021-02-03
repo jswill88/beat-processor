@@ -16,9 +16,10 @@ router.post('/signup', signUp);
 router.post('/signin', signIn);
 router.post('/save', save);
 
+router.post('/test', test);
+
 router.get('/logout', logout);
 router.get('/songlist', songList);
-router.get('/test', test);
 router.get('/open', open);
 
 router.delete('/deletesong', deleteSong);
