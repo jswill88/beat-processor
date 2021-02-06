@@ -11,20 +11,21 @@ const songList = require('./routes/songlist');
 const open = require('./routes/open');
 const update = require('./routes/update');
 const rename = require('./routes/rename');
+const auth = require('../middleware/auth');
 
 router.post('/signup', signUp);
 router.post('/signin', signIn);
-router.post('/save', save);
+router.post('/save', auth, save);
 
 router.post('/test', test);
 
 router.get('/logout', logout);
-router.get('/songlist', songList);
-router.get('/open', open);
+router.get('/songlist', auth, songList);
+router.get('/open', auth, open);
 
-router.delete('/deletesong', deleteSong);
+router.delete('/deletesong', auth, deleteSong);
 
-router.put('/update', update);
-router.patch('/rename', rename);
+router.put('/update', auth, update);
+router.patch('/rename', auth, rename);
 
 module.exports = router;

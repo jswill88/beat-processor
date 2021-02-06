@@ -11,14 +11,9 @@ const User = require('../../models/userModel');
 module.exports = async (req, res, next) => {
   try {
     const { songIdToDelete } = req.body;
-    const { token, songId } = req.cookies;
+    const { id } = req;
+    const { songId } = req.cookies;
 
-    if (!token || token === 'undefined') {
-      return next({
-        status: 400,
-        message: 'Must be signed in to delete song',
-      });
-    }
     if (!songIdToDelete) {
       return next({
         status: 400,
@@ -26,7 +21,7 @@ module.exports = async (req, res, next) => {
       });
     }
 
-    const user = await User.getUserFromToken(token);
+    const user = await User.findById(id);
 
     const songToDelete = user.songs.id(songIdToDelete);
     

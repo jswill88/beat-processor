@@ -2,16 +2,11 @@
 const User = require('../../models/userModel');
 
 module.exports = async (req, res, next) => {
-  const { token } = req.cookies;
 
-  if (!token) {
-    return next({
-      status: 400,
-      message: 'Must be signed in to see song list',
-    });
-  }
+  const { id } = req;
 
-  const user = await User.getUserFromToken(token);
+  const user = await User.findById(id);
+
   if (!user) {
     return next({ message: 'Error finding user' });
   }

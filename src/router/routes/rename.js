@@ -2,23 +2,17 @@ const User = require('../../models/userModel');
 
 module.exports = async (req, res, next) => {
   try {
-    const { token } = req.cookies;
+
+    let { id } = req;
     let { songId, newTitle } = req.body;
 
-    if (!token) {
-      return next({
-        status: 400,
-        message: 'Must be signed in to rename a song',
-      });
-    }
     if (!songId || !newTitle) {
       return next({
         status: 400,
         message: 'Must select a song to rename and provide a new title',
       });
     }
-
-    const user = await User.getUserFromToken(token);
+    const user = await User.findById(id);
     if (!user) {
       return next({
         status: 401,

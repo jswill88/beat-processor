@@ -12,14 +12,8 @@ const User = require('../../models/userModel');
 module.exports = async (req, res, next) => {
   try {
     const songToSave = req.body;
-    const { token } = req.cookies;
+    const { id } = req;
 
-    if (!token || token === 'undefined') {
-      return next({
-        status: 400,
-        message: 'Must be signed in to save song',
-      });
-    }
     if (!songToSave) {
       return next({
         status: 500,
@@ -30,8 +24,7 @@ module.exports = async (req, res, next) => {
       songToSave.title = 'Untitled';
     }
 
-    const user = await User.getUserFromToken(token);
-    const { id } = user;
+    const user = await User.findById(id);
 
     const currentSongs = user.songs;
 
