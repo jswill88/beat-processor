@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { songSchema } = require('./songModel');
 const jwt = require('jsonwebtoken');
-const base64 = require('base-64');
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -53,19 +52,6 @@ userSchema.methods.generateToken = function () {
     id: this._id,
   }, process.env.JWT_SECRET);
   return token;
-};
-
-userSchema.statics.getUserFromToken = async function (token) {
-
-  const encryptedId = token.split('.')[1];
-  const { id } = JSON.parse(base64.decode(encryptedId));
-  
-  const user = await this.findById(id);
-  if(!user) {
-    throw new Error('Error finding user');
-  }
-  return user;
-
 };
 
 module.exports = mongoose.model('User', userSchema);

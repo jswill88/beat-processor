@@ -3,7 +3,7 @@ const User = require('../../models/userModel');
 module.exports = async (req, res, next) => {
   try{
     const { songId } = req.body;
-    const { token } = req.cookies;
+    const { id } = req;
 
     if(!songId) {
       return next({
@@ -11,8 +11,8 @@ module.exports = async (req, res, next) => {
         status: 400,
       });
     }
-  
-    const user = await User.getUserFromToken(token);
+    const user = await User.findById(id);
+
     const song = user.songs.id(songId);
   
     res
