@@ -14,6 +14,8 @@ module.exports = async (req, res, next) => {
     const songToSave = req.body;
     const { id } = req;
 
+    console.log(id);
+
     if (!songToSave) {
       return next({
         status: 500,
