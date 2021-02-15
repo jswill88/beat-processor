@@ -37,7 +37,7 @@ module.exports = async (req, res, next) => {
 
     await user.save();
 
-    res.status(200).json(`Song successfully renamed ${newTitle}`);
+    res.status(200).json({ newTitle });
 
   } catch (e) {
     next({ message: e.message });
