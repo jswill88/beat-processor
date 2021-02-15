@@ -21,7 +21,7 @@ router.post('/test', test);
 
 router.get('/logout', logout);
 router.get('/songlist', auth, songList);
-router.get('/open', auth, open);
+router.post('/open', auth, open);
 
 router.delete('/deletesong', auth, deleteSong);
 

@@ -14,6 +14,8 @@ module.exports = async (req, res, next) => {
     const songToSave = req.body;
     const { id } = req;
 
+    console.log(id);
+
     if (!songToSave) {
       return next({
         status: 500,
@@ -50,7 +52,10 @@ module.exports = async (req, res, next) => {
       .cookie('songId', newSongId, {
         httpOnly: true,
       })
-      .json(`Song '${songToSave.title}' saved`);
+      .json({
+        title: songToSave.title,
+        id: newSongId,
+      });
   } catch (e) {
     next({ message: e.message, status: e.status || 500 });
   }
