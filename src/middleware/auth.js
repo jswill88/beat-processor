@@ -4,7 +4,6 @@ module.exports = (req, _res, next) => {
   try {
 
     const { token } = req.cookies;
-    console.log(req.cookies);
     if (!token || token === 'undefined') {
       return next({
         status: 401,
