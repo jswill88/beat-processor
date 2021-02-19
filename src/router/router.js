@@ -13,6 +13,7 @@ const update = require('./routes/update');
 const close = require('./routes/close');
 const rename = require('./routes/rename');
 const auth = require('../middleware/auth');
+const loggedIn = require('./routes/loggedIn');
 
 router.post('/signup', signUp);
 router.post('/signin', signIn);
@@ -24,6 +25,7 @@ router.post('/test', test);
 router.get('/logout', logout);
 router.get('/songlist', auth, songList);
 router.get('/close', auth, close);
+router.get('/loggedin', loggedIn);
 
 router.delete('/deletesong', auth, deleteSong);
 
