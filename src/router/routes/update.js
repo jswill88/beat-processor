@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
 
     await user.save();
 
-    res.status(200).json('Song successfully saved');
+    res.status(200).json({title: song.title});
 
   } catch (e) {
 
