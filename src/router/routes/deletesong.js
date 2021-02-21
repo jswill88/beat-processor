@@ -39,7 +39,7 @@ module.exports = async (req, res, next) => {
     }
     res
       .status(200)
-      .json(`Successfully deleted ${title}`);
+      .json({ title });
 
   } catch (e) {
     next({ message: e.message });
