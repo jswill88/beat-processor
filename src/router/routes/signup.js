@@ -20,6 +20,8 @@ module.exports = async (req, res, next) => {
       });
     }
 
+    email = email.toLowerCase();
+
     if (!username) {
       username = email;
     }
