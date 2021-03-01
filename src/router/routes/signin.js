@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
       });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
       return next({
         status: 401,
