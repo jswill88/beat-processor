@@ -48,6 +48,10 @@ module.exports = async (req, res, next) => {
         .status(201)
         .cookie('token', token, {
           httpOnly: true,
+          //////////////////
+          secure: true,
+          sameSite: 'none',
+          //////////////////
         })
         .json('User successfully added');
     }

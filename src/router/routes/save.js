@@ -51,6 +51,10 @@ module.exports = async (req, res, next) => {
       .status(201)
       .cookie('songId', newSongId, {
         httpOnly: true,
+        //////////////////
+        secure: true,
+        sameSite: 'none',
+        //////////////////
       })
       .json({
         title: songToSave.title,

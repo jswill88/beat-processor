@@ -19,6 +19,10 @@ module.exports = async (req, res, next) => {
       .status(200)
       .cookie('songId', songId, {
         httpOnly: true,
+        //////////////////
+        secure: true,
+        sameSite: 'none',
+        //////////////////
       })
       .json(song);
 
