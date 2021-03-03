@@ -11,7 +11,10 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: [process.env.ORIGIN],
+  origin: [
+    process.env.ORIGIN_DEV,
+    process.env.ORIGIN_PROD,
+  ],
   // allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   // preflightContinue: true,
