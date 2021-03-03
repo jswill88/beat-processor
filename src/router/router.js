@@ -15,6 +15,8 @@ const rename = require('./routes/rename');
 const auth = require('../middleware/auth');
 const loggedIn = require('./routes/loggedIn');
 
+router.get('/', (req,res) => res.status(200).send('Cake Pop API'));
+
 router.post('/signup', signUp);
 router.post('/signin', signIn);
 router.post('/save', auth, save);
