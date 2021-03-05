@@ -3,7 +3,9 @@ const User = require('../../models/userModel');
 
 module.exports = async (req, res, next) => {
   try {
+    console.log('something happening');
     const { token, songId } = req.cookies;
+    console.log('login route token', token);
     if (!token || token === 'undefined') {
       return res.status(200).json(false);
     }
