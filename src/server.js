@@ -17,8 +17,18 @@ app.use(cors({
     process.env.ORIGIN_DEV,
     process.env.ORIGIN_PROD,
   ],
+  // allowedHeaders:
   credentials: true,
+  preflightContinue: true,
 }));
+// app.options('*', cors({
+//   origin: [
+//     process.env.ORIGIN_DEV,
+//     process.env.ORIGIN_PROD,
+//   ],
+//   // allowedHeaders:
+//   credentials: true,
+// }));
 app.use('/api/v1', router);
 app.get('/', (_req,res) => res.status(200).json('Cake Pop API'));
 
