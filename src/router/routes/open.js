@@ -2,6 +2,8 @@ const User = require('../../models/userModel');
 
 module.exports = async (req, res, next) => {
   try{
+
+    console.log(req.body);
     const { songId } = req.body;
     const { id } = req;
 
