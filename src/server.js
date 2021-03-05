@@ -11,7 +11,7 @@ console.log(process.env.ORIGIN_DEV);
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser('xyz123'));
 app.use(cors({
   origin: [
     process.env.ORIGIN_DEV,
