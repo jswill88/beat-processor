@@ -7,6 +7,8 @@ const router = require('./router/router');
 const generalError = require('./errors/generalError');
 const routeError = require('./errors/404');
 
+console.log(process.env.ORIGIN_DEV);
+
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
@@ -15,12 +17,11 @@ app.use(cors({
     process.env.ORIGIN_DEV,
     process.env.ORIGIN_PROD,
   ],
-  // allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  // preflightContinue: true,
 }));
-
 app.use('/api/v1', router);
+app.get('/', (_req,res) => res.status(200).json('Cake Pop API'));
+
 app.use('*', routeError);
 app.use(generalError);
 
