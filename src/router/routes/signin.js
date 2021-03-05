@@ -39,6 +39,7 @@ module.exports = async (req, res, next) => {
         //////////////////
         sameSite: 'none',
         secure: true,
+        maxAge: 600000000,
         //////////////////
       })
       .json({ username, songs });
