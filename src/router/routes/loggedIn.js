@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../../models/userModel');
+const cookieInfo = require('./cookie-info');
 
 module.exports = async (req, res, next) => {
   try {
@@ -18,16 +19,7 @@ module.exports = async (req, res, next) => {
     }));
     const { username } = user;
     // get all info needed if user logged in (name, songlist)
-    if (songId) res.clearCookie('songId',
-      {
-        httpOnly: true,
-        //////////////////
-        secure: true,
-        sameSite: 'None',
-        domain: '*.cake-pop.netlify.app',
-        // maxAge: 600000000,
-        //////////////////
-      });
+    if (songId) res.clearCookie('songId', cookieInfo);
 
     res.status(200)
       .send({ songList, username });

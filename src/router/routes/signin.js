@@ -1,5 +1,5 @@
 const User = require('../../models/userModel');
-
+const cookieInfo = require('./cookie-info');
 module.exports = async (req, res, next) => {
   try {
 
@@ -34,15 +34,7 @@ module.exports = async (req, res, next) => {
 
     res
       .status(200)
-      .cookie('token', token, {
-        httpOnly: true,
-        //////////////////
-        sameSite: 'None',
-        secure: true,
-        domain: '*.cake-pop.netlify.app',
-        // maxAge: 600000000,
-        //////////////////
-      })
+      .cookie('token', token, cookieInfo)
       .json({ username, songs });
 
   } catch (e) {

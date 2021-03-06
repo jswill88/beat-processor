@@ -1,4 +1,5 @@
 const User = require('../../models/userModel');
+const cookieInfo = require('./cookie-info');
 
 module.exports = async (req, res, next) => {
   try {
@@ -46,15 +47,7 @@ module.exports = async (req, res, next) => {
 
       res
         .status(201)
-        .cookie('token', token, {
-          httpOnly: true,
-          //////////////////
-          domain: '*.cake-pop.netlify.app',
-          secure: true,
-          sameSite: 'None',
-          // maxAge: 600000000,
-          //////////////////
-        })
+        .cookie('token', token, cookieInfo)
         .json('User successfully added');
     }
 

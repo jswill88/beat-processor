@@ -1,4 +1,5 @@
 const User = require('../../models/userModel');
+const cookieInfo = require('./cookie-info');
 /**
  * @name deleteSong Takes in songIdToDelete from the request body
  * and the user token from the cookie. Finds the user and deletes
@@ -35,15 +36,7 @@ module.exports = async (req, res, next) => {
     await user.save();
 
     if (songId === songIdToDelete) {
-      res.clearCookie('songId', {
-        httpOnly: true,
-        //////////////////
-        secure: true,
-        sameSite: 'None',
-        domain: '*.cake-pop.netlify.app',
-        // maxAge: 600000000,
-        //////////////////
-      });
+      res.clearCookie('songId', cookieInfo);
     }
     res
       .status(200)

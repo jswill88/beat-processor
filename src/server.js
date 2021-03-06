@@ -18,9 +18,9 @@ app.use(cors({
     process.env.ORIGIN_PROD,
   ],
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  methods: ['GET','PUT','POST','DELETE','PATCH','HEAD'],
-  preflightContinue: true,
+  // allowedHeaders: ['Content-Type', 'Authorization'],
+  // methods: ['GET','PUT','POST','DELETE','PATCH'],
+  // preflightContinue: true,
 }));
 
 app.use('/api/v1', router);

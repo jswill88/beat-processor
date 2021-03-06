@@ -1,4 +1,5 @@
 const User = require('../../models/userModel');
+const cookieInfo = require('./cookie-info');
 /**
  * @name save Saves a new song. Adds a number to the title if 
  * the title already exists. Calls the song 'Untitled' if no 
@@ -49,15 +50,7 @@ module.exports = async (req, res, next) => {
 
     res
       .status(201)
-      .cookie('songId', newSongId, {
-        httpOnly: true,
-        //////////////////
-        secure: true,
-        sameSite: 'None',
-        domain: '*.cake-pop.netlify.app',
-        // maxAge: 600000000,
-        //////////////////
-      })
+      .cookie('songId', newSongId, cookieInfo)
       .json({
         title: songToSave.title,
         id: newSongId,

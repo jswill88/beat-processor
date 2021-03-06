@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 module.exports = (req, _res, next) => {
   try {
     const { token } = req.cookies;
-    console.log('req', req);
+    console.log('toekn in auth', token, '\ncookies', req.cookies);
     if (!token || token === 'undefined') {
       return next({
         status: 401,

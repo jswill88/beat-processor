@@ -1,3 +1,5 @@
+const cookieInfo = require('./cookie-info');
+
 module.exports = (_req, res, next) => {
   try {
     res
@@ -11,15 +13,7 @@ module.exports = (_req, res, next) => {
         // maxAge: 600000000,
         //////////////////
       })
-      .clearCookie('token',{
-        httpOnly: true,
-        //////////////////
-        secure: true,
-        sameSite: 'None',
-        domain: '*.cake-pop.netlify.app',
-        // maxAge: 600000000,
-        //////////////////
-      })
+      .clearCookie('token', cookieInfo)
       .json('Logged out successfully');
   } catch (e) {
     next({ message: e.message });
