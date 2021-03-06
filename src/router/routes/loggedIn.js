@@ -18,7 +18,16 @@ module.exports = async (req, res, next) => {
     }));
     const { username } = user;
     // get all info needed if user logged in (name, songlist)
-    if (songId) res.clearCookie('songId');
+    if (songId) res.clearCookie('songId',
+      {
+        httpOnly: true,
+        //////////////////
+        secure: true,
+        sameSite: 'None',
+        domain: '*.cake-pop.netlify.app',
+        // maxAge: 600000000,
+        //////////////////
+      });
 
     res.status(200)
       .send({ songList, username });
