@@ -40,7 +40,6 @@ module.exports = async (req, res, next) => {
         //////////////////
         sameSite: 'none',
         secure: true,
-        signed: true,
         // maxAge: 600000000,
         //////////////////
       })
