@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
       .cookie('songId', songId, {
         httpOnly: true,
         //////////////////
-        // domain: '*.cake-pop.netlify.app',
+        domain: '*.cake-pop.netlify.app',
         secure: true,
         sameSite: 'none',
         // maxAge: 600000000,

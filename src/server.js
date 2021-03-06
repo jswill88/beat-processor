@@ -21,7 +21,7 @@ app.use(cors({
   credentials: true,
   // allowedHeaders: ['Content-Type', 'Authorization'],
   // methods: ['OPTIONS', 'GET','POST'],
-  preflightContinue: true,
+  // preflightContinue: true,
 }));
 
 app.use('/api/v1', router);
