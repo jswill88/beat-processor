@@ -49,6 +49,7 @@ module.exports = async (req, res, next) => {
         .cookie('token', token, {
           httpOnly: true,
           //////////////////
+          domain: '*.cake-pop.netlify.app',
           secure: true,
           sameSite: 'none',
           // maxAge: 600000000,

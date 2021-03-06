@@ -39,6 +39,7 @@ module.exports = async (req, res, next) => {
         //////////////////
         sameSite: 'none',
         secure: true,
+        domain: '*.cake-pop.netlify.app',
         // maxAge: 600000000,
         //////////////////
       })
