@@ -20,7 +20,7 @@ app.use(cors({
   credentials: true,
   // allowedHeaders: ['Content-Type', 'Authorization'],
   // methods: ['GET','PUT','POST','DELETE','PATCH'],
-  // preflightContinue: true,
+  preflightContinue: true,
 }));
 
 app.use('/api/v1', router);
