@@ -8,10 +8,11 @@ const generalError = require('./errors/generalError');
 const routeError = require('./errors/404');
 
 console.log(process.env.ORIGIN_DEV);
+app.set('trust proxy', true);
 
+app.use(cookieParser());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-app.use(cookieParser());
 app.use(cors({
   origin: [
     // process.env.ORIGIN_DEV,
