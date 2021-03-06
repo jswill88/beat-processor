@@ -14,10 +14,10 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors({
-  origin: [
-    // process.env.ORIGIN_DEV,
-    process.env.ORIGIN_PROD,
-  ],
+  // origin: [
+  //   // process.env.ORIGIN_DEV,
+  //   process.env.ORIGIN_PROD,
+  // ],
   credentials: true,
   // allowedHeaders: ['Content-Type', 'Authorization'],
   // methods: ['OPTIONS', 'GET','POST'],
