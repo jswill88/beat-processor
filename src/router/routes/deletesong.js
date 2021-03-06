@@ -35,7 +35,15 @@ module.exports = async (req, res, next) => {
     await user.save();
 
     if (songId === songIdToDelete) {
-      res.clearCookie('songId');
+      res.clearCookie('songId', {
+        httpOnly: true,
+        //////////////////
+        secure: true,
+        sameSite: 'None',
+        domain: '*.cake-pop.netlify.app',
+        // maxAge: 600000000,
+        //////////////////
+      });
     }
     res
       .status(200)
