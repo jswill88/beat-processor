@@ -23,8 +23,8 @@ module.exports = async (req, res, next) => {
         httpOnly: true,
         //////////////////
         secure: true,
-        sameSite: 'none',
-        domain: '.cake-pop.netlify.app',
+        sameSite: 'None',
+        domain: '*.cake-pop.netlify.app',
         // maxAge: 600000000,
         //////////////////
       })
