@@ -36,10 +36,10 @@ module.exports = async (req, res, next) => {
       .status(200)
       .cookie('token', token, {
         httpOnly: true,
-        domain: process.env.ORIGIN_PROD,
+        // domain: process.env.ORIGIN_PROD,
         //////////////////
-        sameSite: 'none',
-        secure: true,
+        // sameSite: 'none',
+        // secure: true,
         // maxAge: 600000000,
         //////////////////
       })
