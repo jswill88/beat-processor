@@ -19,7 +19,7 @@ app.use(cors({
   ],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
-  methods: ['GET','PUT','POST','DELETE','PATCH'],
+  methods: ['GET','PUT','POST','DELETE','PATCH','HEAD'],
   preflightContinue: true,
 }));
 
