@@ -19,7 +19,7 @@ app.use(cors({
   credentials: true,
   // allowedHeaders: ['Content-Type', '*'],
   // methods: ['GET','PUT','POST','DELETE','PATCH','OPTIONS'],
-  // preflightContinue: true,
+  preflightContinue: true,
 }));
 app.use(cookieParser());
 
