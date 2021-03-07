@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
     }));
     const { username } = user;
     // get all info needed if user logged in (name, songlist)
-    if (songId) res.clearCookie('songId', cookieInfo);
+    if (songId) res.cookie('songId','',cookieInfo);
 
     res.status(200)
       .send({ songList, username });

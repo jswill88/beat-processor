@@ -17,14 +17,14 @@ app.use(cors({
     process.env.ORIGIN_PROD,
   ],
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  methods: ['GET','PUT','POST','DELETE','PATCH','OPTIONS'],
-  preflightContinue: true,
+  // allowedHeaders: ['Content-Type', '*'],
+  // methods: ['GET','PUT','POST','DELETE','PATCH','OPTIONS'],
+  // preflightContinue: true,
 }));
 app.use(cookieParser());
 
 app.use('/api/v1', router);
-app.get('/', (_req,res) => res.status(200).json('Cake Pop API'));
+// app.get('/', (_req,res) => res.status(200).json('Cake Pop API'));
 
 app.use('*', routeError);
 app.use(generalError);
