@@ -19,14 +19,14 @@ module.exports = async (req, res, next) => {
   
     res
       .status(200)
-      .cookie('songId', songId, {
-        httpOnly: true,
-        //////////////////
-        secure: true,
-        sameSite: 'none',
-        // maxAge: 600000000,
-        //////////////////
-      })
+      // .cookie('songId', songId, {
+      //   httpOnly: true,
+      //   //////////////////
+      //   secure: true,
+      //   sameSite: 'none',
+      //   // maxAge: 600000000,
+      //   //////////////////
+      // })
       .json(song);
 
   } catch(e) {

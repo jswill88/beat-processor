@@ -49,14 +49,14 @@ module.exports = async (req, res, next) => {
 
     res
       .status(201)
-      .cookie('songId', newSongId, {
-        httpOnly: true,
-        //////////////////
-        secure: true,
-        sameSite: 'none',
-        // maxAge: 600000000,
-        //////////////////
-      })
+      // .cookie('songId', newSongId, {
+      //   httpOnly: true,
+      //   //////////////////
+      //   secure: true,
+      //   sameSite: 'none',
+      // maxAge: 600000000,
+      //////////////////
+      // })
       .json({
         title: songToSave.title,
         id: newSongId,

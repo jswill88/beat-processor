@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
 
     res
       .status(200)
-      .clearCookie('songId')
+      // .clearCookie('songId')
       .json('Song successfully closed');
 
   } catch (e) {
