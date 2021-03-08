@@ -1,40 +1,25 @@
-Routes:  
-xPOST /signup  
-xPOST /signin  
-xGET /logout  
-xPOST /save - behaves like save as  
-xGET /songlist - sends back song titles and ids for signed in user  
-xGET /open  
-xDELETE /deletesong - delete a song  
-xPUT /update - update song already saved without renaming  
-xPATCH /rename  
-GET /examplesongs  
-POST /examples  
+# Cake Pop Server
 
-if there is an active project - save that one, else save a new one
+This application allows you to make music by clicking on different buttons that represent different instruments and notes. You can create songs of different lengths, different chord progressions, and different tempos. By picking different chords, the notes will automatically change in your song to match the chord. You can also make an account where you can sign in to save and update your songs.
 
-DB:  
-User  
-  email: String required  
-  username: String  
-  password: String required  
-  songs: Array of Songs default []  
-  role: String, enum [user, admin], default user  
+**Live Site:** https://cake-pop.netlify.app  
+**Client GitHub Repo:** https://github.com/jswill88/cake-pop  
+**Server GitHub Repo:** https://github.com/jswill88/cake-pop-server  
 
-Song  
-  title: String  
-  buttonsPressed: Object  
-  bpm: Number  
-  volume: Number  
-  numberOfBeats: Number  
-  chordProgression: Array  
+![Cake Pop Preview](./CakePop.gif)
 
+## Technologies Used
+- React
+- Express
+- MongoDB
+- Node.js
+- Tone.js
+- Ant Design
+- JSON Web Tokens
+- React Context
 
-
-
-
-Resource:  
-https://www.youtube.com/watch?v=scYojqjnHzI&t=145s  
-https://www.freecodecamp.org/news/mongoose101/  
-https://github.com/axios/axios#handling-errors
+Server Resources:   
+- https://www.youtube.com/watch?v=scYojqjnHzI&t=145s  
+- https://www.freecodecamp.org/news/mongoose101/  
+- https://github.com/axios/axios#handling-errors
 
