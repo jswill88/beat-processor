@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
   try {
     const { songIdToDelete } = req.body;
     const { id } = req;
-    const { songId } = req.cookies;
+    // const { songId } = req.cookies;
 
     if (!songIdToDelete) {
       return next({
@@ -34,9 +34,9 @@ module.exports = async (req, res, next) => {
 
     await user.save();
 
-    if (songId === songIdToDelete) {
-      res.clearCookie('songId');
-    }
+    // if (songId === songIdToDelete) {
+    //   res.clearCookie('songId');
+    // }
     res
       .status(200)
       .json({ title });

@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = (req, _res, next) => {
   try {
-    const { token } = req.cookies;
+    const { token } = req.body;
     console.log('req', req);
     if (!token || token === 'undefined') {
       return next({

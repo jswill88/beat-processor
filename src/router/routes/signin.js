@@ -30,19 +30,19 @@ module.exports = async (req, res, next) => {
 
     const token = user.generateToken();
     const { username } = user;
-    const songs = user.songs.map(({title, _id}) => ({title, id: _id}));
+    const songs = user.songs.map(({ title, _id }) => ({ title, id: _id }));
 
     res
       .status(200)
-      .cookie('token', token, {
-        httpOnly: true,
-        //////////////////
-        sameSite: 'none',
-        secure: true,
-        // maxAge: 600000000,
-        //////////////////
-      })
-      .json({ username, songs });
+      // .cookie('token', token, {
+      // httpOnly: true,
+      //////////////////
+      // sameSite: 'none',
+      // secure: true,
+      // maxAge: 600000000,
+      //////////////////
+      // })
+      .json({ username, songs, token });
 
   } catch (e) {
     next({ message: e.message });

@@ -10,7 +10,7 @@ const deleteSong = require('./routes/deletesong');
 const songList = require('./routes/songlist');
 const open = require('./routes/open');
 const update = require('./routes/update');
-const close = require('./routes/close');
+// const close = require('./routes/close');
 const rename = require('./routes/rename');
 const auth = require('../middleware/auth');
 const loggedIn = require('./routes/loggedIn');
@@ -24,8 +24,8 @@ router.post('/test', test);
 
 router.get('/logout', logout);
 router.get('/songlist', auth, songList);
-router.get('/close', auth, close);
-router.get('/loggedin', loggedIn);
+// router.get('/close', auth, close);
+router.post('/loggedin', loggedIn);
 
 router.delete('/deletesong', auth, deleteSong);
 

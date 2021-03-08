@@ -4,7 +4,7 @@ const User = require('../../models/userModel');
 module.exports = async (req, res, next) => {
   try {
     console.log('something happening');
-    const { token, songId } = req.cookies;
+    const { token } = req.body;
     console.log('login route token', token);
     if (!token || token === 'undefined') {
       return res.status(200).json(false);
@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
     }));
     const { username } = user;
     // get all info needed if user logged in (name, songlist)
-    if (songId) res.clearCookie('songId');
+    // if (songId) res.clearCookie('songId');
 
     res.status(200)
       .send({ songList, username });

@@ -3,8 +3,8 @@ const User = require('../../models/userModel');
 module.exports = async (req, res, next) => {
   try {
     const { id } = req;
-    const { songId } = req.cookies;
     const updatedSong = req.body;
+    const { songId } = updatedSong;
 
     if(!songId) {
       return next({
