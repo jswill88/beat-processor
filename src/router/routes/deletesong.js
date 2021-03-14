@@ -34,9 +34,6 @@ module.exports = async (req, res, next) => {
 
     await user.save();
 
-    // if (songId === songIdToDelete) {
-    //   res.clearCookie('songId');
-    // }
     res
       .status(200)
       .json({ title });

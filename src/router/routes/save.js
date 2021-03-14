@@ -4,17 +4,14 @@ const User = require('../../models/userModel');
  * the title already exists. Calls the song 'Untitled' if no 
  * title provided. Adds new song to cookie
  * 
- * @param {Object} req New song in req.body, user id in req.cookies
- * @param {Object} res Response with updated cookie, and 
- * saved message
- * @param {Function} next Called to send to error route
+ * @param {Object} req New song in req.body, id in req
+ * @param {Object} res Responds with object containing title and id
+ * @param {Function} next 
  */
 module.exports = async (req, res, next) => {
   try {
     const songToSave = req.body;
     const { id } = req;
-
-    console.log(id);
 
     if (!songToSave) {
       return next({
@@ -49,14 +46,6 @@ module.exports = async (req, res, next) => {
 
     res
       .status(201)
-      // .cookie('songId', newSongId, {
-      //   httpOnly: true,
-      //   //////////////////
-      //   secure: true,
-      //   sameSite: 'none',
-      // maxAge: 600000000,
-      //////////////////
-      // })
       .json({
         title: songToSave.title,
         id: newSongId,
