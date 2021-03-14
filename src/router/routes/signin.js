@@ -34,14 +34,6 @@ module.exports = async (req, res, next) => {
 
     res
       .status(200)
-      // .cookie('token', token, {
-      // httpOnly: true,
-      //////////////////
-      // sameSite: 'none',
-      // secure: true,
-      // maxAge: 600000000,
-      //////////////////
-      // })
       .json({ username, songs, token });
 
   } catch (e) {
